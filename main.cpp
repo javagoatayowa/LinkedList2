@@ -1,4 +1,8 @@
-#include <iostream>
+#include <iostream> //Aneeq Chowdhury 2021 code to make a linkedlist version of student list. Nihal Parthasarathy has helped me with rounding numbers, a bit on the add function, and he helped me with the delete\
+ function.
+//Also used stack overflow website to figure out how to sum up through a linked list.
+//https://stackoverflow.com/questions/43083819/summing-up-the-elements-in-a-linked-list-recursively-in-c
+//The post was the first post.
 #include <iomanip>
 #include <cstring>
 #include "node.h"
@@ -26,7 +30,7 @@ int main() {//main
       a =1;
     }
     else {
-      if(strcmp(input,"ADD") == 0) {
+      if(strcmp(input,"ADD") == 0) {//add input
         Student* temp = new Student();
 	cout<<"Enter first name";
 	cin>> temp->first;
@@ -39,7 +43,7 @@ int main() {//main
 	int id2 = temp->id;
 	add(temp,head,head,head,id2);
       }
-      if(strcmp(input,"PRINT") == 0) {
+      if(strcmp(input,"PRINT") == 0) {//print input
 	printList(head);
       }
        if(strcmp(input,"DELETE") == 0) {//delete
@@ -57,15 +61,15 @@ int main() {//main
   }
   return 0;
 } //the functions
-void add(Student* s, Node* &head, Node* previous, Node* current, int idtres) {
-  if(head == NULL) {
+void add(Student* s, Node* &head, Node* previous, Node* current, int idtres) {//add function
+  if(head == NULL) {//if head is null
     head = new Node(s);
     head->setNext(NULL);
   }
   else if(current == NULL) {
     previous->setNext(new Node(s));
     previous ->getNext()->setNext(NULL);
-  }
+  }//sorting purposes
   else if(idtres < head->getStudent()->id) {
     Node* temp = head;
     head = new Node(s);
@@ -75,11 +79,11 @@ void add(Student* s, Node* &head, Node* previous, Node* current, int idtres) {
     previous->setNext(new Node(s));
     previous->getNext()->setNext(current);
   }
-  else {
+  else {//recursive method of moving through list
     add(s,head,current,current->getNext(), idtres);
   }
 }
-void printList(Node* firstNode) {
+void printList(Node* firstNode) {//print method
   firstNode->getStudent()->printStudent();
   if(firstNode->getNext() != NULL) {
     printList(firstNode->getNext());//using recursion to go through and print.
