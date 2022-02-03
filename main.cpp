@@ -6,7 +6,9 @@
 using namespace std;
 void add(Student* s, Node* & head, Node* previous, Node* current, int idtres);
 void printList(Node* firstNode);
-void remove(Node* &firstNode, Node* p, Node* c, int theID);//methods
+void remove(Node* &firstNode, Node* p, Node* c, int theID);
+float average(Node* firstNode, int &it);
+//methods
 int main() {//main
   Node* head = NULL;//original head
   cout<<"hey, welcome to student list. to add a student, type ADD. to print, type PRINT, average to get an average of the gpas, and to delete, type DELETE!";
@@ -47,6 +49,10 @@ int main() {//main
         cin>>theIDID;
         remove(head,head,head,theIDID);
       }
+       if(strcmp(input,"AVERAGE") == 0) {//average
+        int count = 0;
+        cout<< fixed << showpoint<< setprecision(2) <<average(head,count)/count << endl;
+       }
     }
   }
   return 0;
@@ -99,5 +105,14 @@ void remove(Node* &firstNode, Node *p, Node* c, int theID) {
   }
   else {//continuing with recursion
     remove(firstNode, c, c->getNext(),theID);
+  }
+}
+float average(Node* firstNode, int &it) {
+  if(firstNode!= NULL) {
+    it++;//summing through with recursion
+    return firstNode->getStudent()->gpa + average(firstNode->getNext(),it);
+  }
+  else {
+    return 0;
   }
 }
